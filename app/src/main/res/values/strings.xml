@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Diabetiker</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">BE/ KE Rechner</string>
+    <string name="title_section4">BE- Tabelle</string>
+    <string name="title_section5">Section 5</string>
+    <string name="title_section6">Section 6</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+
+    <string name="action_settings">Settings</string>
+</resources>
