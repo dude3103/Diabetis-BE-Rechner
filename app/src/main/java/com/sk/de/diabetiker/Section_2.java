@@ -18,11 +18,10 @@ public class Section_2 extends Activity {
         super.onCreate(savedInstanceState);
 
 
-        setContentView(R.layout.webview);
+        setContentView(R.layout.extra);
 
         webView = (WebView) findViewById(R.id.webView1);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setLoadsImagesAutomatically(true);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("http://google.de/");
         webView.getSettings().setBuiltInZoomControls(true);

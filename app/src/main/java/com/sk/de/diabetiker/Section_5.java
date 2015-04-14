@@ -1,33 +1,52 @@
 package com.sk.de.diabetiker;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.Window;
-import android.view.WindowManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-/**
- * Created by Dude on 10.04.2015.
- */
+
 public class Section_5 extends Activity {
 
-    private WebView webView;
+    WebView mWeb;
+    ProgressDialog mProgress;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // no need to use title bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // set webview as main content only
+        mWeb = new WebView(this);
+        setContentView(mWeb);
+        // set Javascript
+        WebSettings settings = mWeb.getSettings();
+        settings.setJavaScriptEnabled(true);
+        // the init state of progress dialog
+        mWeb.getSettings().setBuiltInZoomControls(true);
+        mWeb.getSettings().setDisplayZoomControls(false);
+        mProgress = ProgressDialog.show(this, "Lade", "Einen kleinen Moment Bitte...");
 
+        // add a WebViewClient for WebView, which actually handles loading data from web
+        mWeb.setWebViewClient(new WebViewClient() {
+            // load url
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
 
-
-        setContentView(R.layout.webview);
-
-
-        webView = (WebView) findViewById(R.id.webView1);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setLoadsImagesAutomatically(true);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("http://convert2mp3.net");
-        webView.getSettings().setBuiltInZoomControls(true);
-        webView.getSettings().setDisplayZoomControls(false);
+            // when finish loading page
+            public void onPageFinished(WebView view, String url) {
+                if(mProgress.isShowing()) {
+                    mProgress.dismiss();
+                }
+            }
+        });
+        // set url for webview to load
+        mWeb.loadUrl("http://convert2mp3.net");
     }
 }
